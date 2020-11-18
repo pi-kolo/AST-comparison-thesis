@@ -4,7 +4,7 @@ from structures.tree import Tree
 
 
 class TreeMetric():
-    def __init__(self, T1, T2):
+    def __init__(self, T1: Tree, T2: Tree):
         self.T1 = T1
         self.T2 = T2
 

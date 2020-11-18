@@ -1,12 +1,11 @@
-from . import node
+from .node import Node
 
 class Tree():
-    def __init__(self, root):
-        self.root : node.Node = root
+    def __init__(self, root: Node):
+        self.root = root
         # self.nodes : [str] = []
 
     def get_nodes(self):
-        
         nodes = []
         def get_children(node):
             for child in node.children:
@@ -16,16 +15,13 @@ class Tree():
         get_children(self.root)
         return nodes
 
-    def get_node_children(self, node):
+    def get_node_children(self, node: Node) -> [Node]:
         nodes = []
         def f(node):
             for child in node.children:
                 nodes.append(child)
                 f(child)
         f(node)
-        # for child in node.children:
-        #     nodes.append(child)
-        #     self.get_node_children(child)
         return nodes
 
     def get_nodes_postorder(self):
