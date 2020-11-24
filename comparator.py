@@ -4,6 +4,7 @@ import ast
 from tree_comparators.metric import TreeMetric
 from tree_comparators.similar_nodes import NodesQuantityComparator
 from custom_ast import CustomAST
+from dynamic_ted import tree_edit_distance, printable_distance
 
 
 # Check: Similarity = 2 x S / (2 x S + L + R)
@@ -23,9 +24,13 @@ def main():
     metric = TreeMetric(tree1.tree, tree2.tree)
     metric_similarity = metric.count_similarity()
     quantity_similarity = NodesQuantityComparator(tree1.tree, tree2.tree).compare()
+    edit_distance = tree_edit_distance(tree1.tree, tree2.tree)
     print("Podobieństwo:")
     print(f'-przy metryce: {metric_similarity}')
     print(f'-przy zliczaniu: {quantity_similarity}')
+    print(f'-przy tree edit: {edit_distance}')
+    # printable_distance(tree1.tree, tree2.tree)
+
 
     # tree1.print_tree()
 

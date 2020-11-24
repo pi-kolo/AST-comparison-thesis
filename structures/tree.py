@@ -15,6 +15,23 @@ class Tree():
         get_children(self.root)
         return nodes
 
+    def depth_calc(self):
+        def depth_levels(node, level):
+            node.depth = level
+            for child in node.children:
+                depth_levels(child, level+1)
+        depth_levels(self.root, 0)
+
+    def get_nodes_pre(self):
+        nodes = []
+        def get_children(node):
+            for child in node.children:
+                nodes.append(child)
+                get_children(child)
+        nodes.append(self.root)
+        get_children(self.root)
+        return nodes
+
     def get_node_children(self, node: Node) -> [Node]:
         nodes = []
         def f(node):
