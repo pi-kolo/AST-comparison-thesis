@@ -2,10 +2,10 @@ import sys
 import ast
 import argparse 
 
-from tree_comparators.metric import TreeMetric
-from tree_comparators.similar_nodes import NodesQuantityComparator
+from tree_comparators.largest_forest import LargestForest
+from tree_comparators.similar_nodes import node_quantity_compare
 from custom_ast import build_tree, print_tree
-from tree_comparators.dynamic_ted import tree_edit_distance, printable_distance
+from tree_comparators.dynamic_ted import tree_edit_distance
 
 
 def main():
@@ -40,27 +40,27 @@ def main():
     tree2 = build_tree(ast_2)
     
     if args.largest_common_forest:
-        metric = TreeMetric(tree1, tree2)
+        metric = LargestForest(tree1, tree2)
         metric_similarity = metric.count_similarity()
-        print(f'Similarity calculated with largest common forest algorithm: {metric_similarity}')
+        print(f'{metric_similarity:.4f} - similarity calculated with largest common forest algorithm')
         return
     if args.tree_edit_distance:
         edit_distance = tree_edit_distance(tree1, tree2)
-        print(f'Similarity calculated with tree edit distance algorithm: {edit_distance}')
+        print(f'{edit_distance:.4f} - similarity calculated with tree edit distance algorithm ')
         return
     if args.counting:
-        quantity_similarity = NodesQuantityComparator(tree1, tree2).compare()
-        print(f'Similarity calculated by counting same nodes: {quantity_similarity}')
+        quantity_similarity = node_quantity_compare(tree1, tree2)
+        print(f'{quantity_similarity:.4f} - similarity calculated by counting common nodes')
         return     
    
     print("Similarity:")
-    metric = TreeMetric(tree1, tree2)
+    metric = LargestForest(tree1, tree2)
     metric_similarity = metric.count_similarity()
-    print(f'•calculated with largest common forest algorithm: {metric_similarity}')
-    quantity_similarity = NodesQuantityComparator(tree1, tree2).compare()
-    print(f'•calculated by counting same nodes: {quantity_similarity}')
+    print(f'{metric_similarity:.4f} - calculated with largest common forest algorithm ')
+    quantity_similarity = node_quantity_compare(tree1, tree2)
+    print(f'{quantity_similarity:.4f} - calculated by counting common nodes ')
     edit_distance = tree_edit_distance(tree1, tree2)
-    print(f'•calculated with tree edit distance algorithm: {edit_distance}')
+    print(f'{edit_distance:.4f} - calculated with tree edit distance algorithm')
 
 if __name__ == "__main__":
     main()

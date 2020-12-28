@@ -3,8 +3,8 @@ import ast
 from structures.node import Node
 from structures.tree import Tree
 
-# build custom AST tree from ast object
 def build_tree(ast_root: ast.AST) -> Tree: 
+    """ Build custom AST tree from ast object """
     
     # add all ast_node children to custom_node children list
     def walk_children(custom_node, ast_node) -> None:
@@ -21,7 +21,7 @@ def build_tree(ast_root: ast.AST) -> Tree:
 
 
 def print_tree(tree: Tree) -> None:
-
+    """ Print tree object with indentation """
     def print_child_nodes(node, level) -> None:
         for child in node.children:
             print(2*level * '-' + child.name)
